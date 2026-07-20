@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعدادات المنصة | الأستاذ محمد لبابيدي</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <style>
+        /* تم الحفاظ على تصميمك الأصلي تماماً مع تحسين الألوان الهيكلية */
+        :root { --primary-color: #1a365d; --accent-color: #e53e3e; --bg-color: #f7fafc; --text-color: #2d3748; --box-bg: #ffffff; --card-border: #edf2f7; --success-color: #38a169; --btn-text: #ffffff; --danger-color: #e53e3e; --vip-color: #d97706; --body-font-size: 16px; }
+        body.dark-mode { --bg-color: #111827; --text-color: #f3f4f6; --box-bg: #1f2937; --primary-color: #06b6d4; --accent-color: #f43f5e; --card-border: #374151; --success-color: #059669; --btn-text: #111827; --danger-color: #f43f5e; --vip-color: #fbbf24; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: var(--bg-color); color: var(--text-color); padding-bottom: 100px !important; font-size: var(--body-font-size); transition: background 0.3s ease, color 0.3s ease; }
+        header { background: #1a365d; color: white; padding: 20px; text-align: center; transition: background 0.3s ease, border-color 0.3s ease; }
+        body.dark-mode header { background: var(--box-bg); border-bottom: 2px solid var(--primary-color); }
+        .header-container { display: flex; align-items: center; justify-content: center; gap: 20px; max-width: 1000px; margin: 0 auto; }
+        .logo-img { width: 70px; height: auto; object-fit: cover; }
+        .main-title { font-size: 1.6rem; font-weight: bold; color: #ffffff; margin: 0; }
+        body.dark-mode .main-title { color: var(--primary-color); }
+        .container { max-width: 600px; margin: 30px auto; padding: 0 20px; }
+        .settings-section { background: var(--box-bg); border: 2px solid var(--card-border); border-radius: 16px; padding: 20px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.01); animation: fadeIn 0.4s ease; }
+        .section-title { font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--card-border); padding-bottom: 8px; }
+        .settings-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--card-border); }
+        .settings-row:last-child { border-bottom: none; }
+        .row-info { display: flex; flex-direction: column; gap: 4px; }
+        .row-label { font-weight: 600; font-size: 0.95rem; }
+        .row-desc { font-size: 0.8rem; opacity: 0.6; }
+        .sub-badges-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .sub-item-badge { background: rgba(56, 161, 105, 0.12); color: var(--success-color); border: 1px solid rgba(56, 161, 105, 0.3); padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+        .sub-item-badge.free-badge { background: rgba(6, 182, 212, 0.12); color: #06b6d4; border: 1px solid rgba(6, 182, 212, 0.3); }
+        body.dark-mode .sub-item-badge.free-badge { color: #22d3ee; }
+        .no-subs-text { font-size: 0.85rem; opacity: 0.6; padding: 5px 0; display: flex; align-items: center; gap: 6px; }
+        .vip-active-card { background: rgba(217, 119, 6, 0.08) !important; border: 2px solid rgba(217, 119, 6, 0.4) !important; }
+        .btn-vip-gold { width: 100%; background: linear-gradient(135deg, #d97706, #f59e0b); color: #ffffff !important; border: none; padding: 12px; font-size: 0.95rem; border-radius: 12px; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2); transition: all 0.25s; text-decoration: none; box-sizing: border-box; }
+        .btn-vip-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 166px rgba(217, 119, 6, 0.35); }
+        .btn-settings { background: var(--bg-color); color: var(--text-color); border: 1px solid var(--card-border); padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .btn-settings:hover { background: var(--primary-color); color: #ffffff; border-color: var(--primary-color); }
+        body.dark-mode .btn-settings:hover { color: #111827; }
+        .btn-danger { color: var(--danger-color); border-color: var(--danger-color); }
+        .btn-danger:hover { background: var(--danger-color); color: #ffffff; border-color: var(--danger-color); }
+        body.dark-mode .btn-danger:hover { color: #ffffff; }
+        .btn-logout-block { width: 100%; justify-content: center; padding: 12px; font-size: 0.95rem; border-radius: 12px; box-sizing: border-box; }
+        .switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .3s; border-radius: 34px; }
+        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--primary-color); }
+        input:checked + .slider:before { transform: translateX(24px); }
+        .social-grid { display: flex; gap: 10px; margin-top: 5px; }
+        .social-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--card-border); text-decoration: none; font-size: 1.1rem; transition: all 0.2s; }
+        .social-icon.tg:hover { background: #0088cc; color: #fff; }
+        .social-icon.ig:hover { background: #e1306c; color: #fff; }
+        .social-icon.wa:hover { background: #25d366; color: #fff; }
+        .bottom-nav { position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; height: 70px !important; background-color: #ffffff !important; display: flex !important; justify-content: space-around !important; align-items: center !important; box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08) !important; z-index: 99999 !important; padding: 0 !important; margin: 0 !important; box-sizing: border-box !important; }
+        body.dark-mode .bottom-nav { background-color: var(--box-bg) !important; border-top: 1px solid var(--card-border) !important; }
+        .nav-item { display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; color: #9ca3af !important; text-decoration: none !important; width: 100% !important; height: 100% !important; }
+        .icon-wrapper { font-size: 1.4rem !important; height: 28px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s !important; }
+        .nav-text { font-size: 0.8rem !important; font-weight: 600 !important; margin-top: 5px !important; }
+        .nav-item.active { color: var(--accent-color) !important; }
+        .nav-item.active .icon-wrapper { transform: translateY(-6px) scale(1.2) !important; color: var(--accent-color) !important; }
+        .app-version { text-align: center; font-size: 0.75rem; opacity: 0.4; margin-top: 20px; line-height: 1.4; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ✨ المكون الاحترافي: نافذة منبثقة زجاجية محاطة بإطار متكيف مع الوضعين الذكيين */
+        .wv-modal-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000000; opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+        .wv-modal-backdrop.active { opacity: 1; pointer-events: auto; }
+        
+        /* 🎨 هنا تم تطبيق الإطار المحيط الملون والمتناسق تلقائياً مع التصميم */
+        .wv-modal-box { background: var(--box-bg); border: 3px solid var(--danger-color); color: var(--text-color); width: 88%; max-width: 400px; border-radius: 24px; padding: 28px 24px 24px 24px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3); transform: scale(0.9) translateY(15px); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-sizing: border-box; }
+        .wv-modal-backdrop.active .wv-modal-box { transform: scale(1) translateY(0); }
+        
+        /* حاوية الأيقونة الدائرية الاحترافية المحدثة */
+        .wv-modal-icon-bg { width: 68px; height: 68px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; background: rgba(6, 182, 212, 0.12); color: var(--primary-color); transition: all 0.2s; }
+        .wv-modal-icon { font-size: 1.6rem; display: flex; align-items: center; justify-content: center; }
+        
+        .wv-modal-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 10px 0; color: var(--text-color); letter-spacing: -0.3px; }
+        .wv-modal-message { font-size: 0.95rem; opacity: 0.75; margin: 0 0 26px 0; line-height: 1.6; padding: 0 8px; }
+        
+        /* توزيع الأزرار بشكل متناسق ومطوّر */
+        .wv-modal-actions { display: flex; gap: 12px; justify-content: center; width: 100%; }
+        .wv-btn { flex: 1; padding: 12px 20px; border-radius: 12px; font-weight: 600; font-size: 0.95rem; cursor: pointer; border: none; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; }
+        .wv-btn-confirm { background: var(--primary-color); color: #ffffff; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+        body.dark-mode .wv-btn-confirm { color: #111827; }
+        .wv-btn-confirm:hover { transform: translateY(-1px); filter: brightness(1.08); }
+        .wv-btn-confirm:active { transform: translateY(0); }
+        
+        .wv-btn-cancel { background: var(--card-border); color: var(--text-color); opacity: 0.9; }
+        .wv-btn-cancel:hover { opacity: 1; background: rgba(0,0,0,0.05); }
+        body.dark-mode .wv-btn-cancel:hover { background: rgba(255,255,255,0.08); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <img src="logo.png" alt="لوغو" class="logo-img">
+            <div class="header-text">
+                 <h1 class="main-title">إعدادات المنصة المتقدمة ⚙️</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- حقل بيانات الطالب -->
+        <div class="settings-section">
+            <div class="section-title">
+                <i class="fa-solid fa-user-graduate"></i> بيانات حساب الطالب
+            </div>
+            <div class="settings-row">
+                <div class="row-info">
+                    <span class="row-label">اسم الطالب المسجل</span>
+                    <span class="row-desc" id="student-name-display">طالب زائر</span>
+                </div>
+            </div>
+            <div class="settings-row">
+                <div class="row-info">
+                    <span class="row-label">رقم الهاتف النشط</span>
+                    <span class="row-desc" id="student-phone-display">لا يوجد رقم محفوظ</span>
+                </div>
+            </div>
+            <div class="settings-row">
+                <div class="row-info">
+                    <span class="row-label">المحافظة</span>
+                    <span class="row-desc" id="student-governorate-display">غير محددة</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-section" id="vip-management-card">
+            <div class="section-title" id="vip-card-title" style="color: var(--vip-color); border-bottom-color: rgba(217,119,6,0.15);">
+                <i class="fa-solid fa-crown"></i> باقة VIP الشاملة للوصول الكامل
+            </div>
+            <div id="vip-interactive-area" style="margin-top: 5px;"></div>
+        </div>
+
+        <div class="settings-section">
+            <div class="section-title">
+                <i class="fa-solid fa-id-card-clip"></i> حزم المناهج والصفوف النشطة
+            </div>
+            <div class="row-info" style="margin-bottom: 5px;">
+                <span class="row-desc">الأقسام المفتوحة لحسابك حالياً (المجانية العامة والخاصة المشترك بها):</span>
+            </div>
+            <div class="sub-badges-container" id="student-subscriptions-container"></div>
+        </div>
+
+        <div class="settings-section">
+            <div class="section-title">
+                <i class="fa-solid fa-sliders"></i> مظهر وتخصيص الواجهة
+            </div>
+            <div class="settings-row">
+                <div class="row-info">
+                    <span class="row-label">الوضع الليلي (Dark Mode)</span>
+                    <span class="row-desc">تغيير الألوان لراحة العين في الإضاءة الخافتة</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="section-title">
+                <i class="fa-solid fa-headset"></i> الدعم والروابط الرسمية
+            </div>
+            <div class="settings-row">
+                <div class="row-info">
+                    <span class="row-label">تواصل مع الأستاذ محمد</span>
+                    <span class="row-desc">للاستفسارات، الشكاوى أو طلبات تفعيل الأكواد اليدوية</span>
+                </div>
+                <div class="social-grid">
+                    <a href="https://t.me/YourBot" target="_blank" class="social-icon tg" title="تلغرام"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon ig" title="إنستغرام"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/9639XXXXXXXX" target="_blank" class="social-icon wa" id="general-wa-link" title="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-section" style="border-color: rgba(229, 62, 62, 0.3); background: rgba(229, 62, 62, 0.02);">
+            <div class="section-title" style="color: var(--danger-color); border-bottom-color: rgba(229, 62, 62, 0.15);">
+                <i class="fa-solid fa-gears"></i> إدارة الجلسة الحالية
+            </div>
+            <p style="font-size: 0.8rem; opacity: 0.7; margin: 0 0 12px 0; line-height: 1.4;">
+                عند تسجيل الخروج، سيتم مسح صلاحيات الوصول النشطة من هذا الجهاز والعودة إلى وضع الزائر فوراً.
+            </p>
+            <button class="btn-settings btn-danger btn-logout-block" onclick="logoutStudent()">
+                <i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج من الجهاز
+            </button>
+        </div>
+
+        <div class="app-version">
+            منصة الأستاذ محمد لبابيدي الرقمية للرياضيات<br>
+            إصدار النظام المستقر: v3.2.0 (إضافة وعرض حقل المحافظة وجلبها ديناميكياً)
+        </div>
+
+    </div>
+
+    <!-- الشريط السفلي المدمج والثابت بالتطبيق -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <div class="icon-wrapper"><i class="fa-solid fa-house"></i></div>
+            <span class="nav-text">الرئيسية</span>
+        </a>
+        <a href="library.html" class="nav-item">
+            <div class="icon-wrapper"><i class="fa-solid fa-book-open"></i></div>
+            <span class="nav-text">المكتبة</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <div class="icon-wrapper"><i class="fa-solid fa-user-graduate"></i></div>
+            <span class="nav-text">عن الأستاذ</span>
+        </a>
+        <a href="settings.html" class="nav-item active">
+            <div class="icon-wrapper"><i class="fa-solid fa-gear"></i></div>
+            <span class="nav-text">الإعدادات</span>
+        </a>
+    </nav>
+
+    <!-- ✨ واجهة الـ Floating Modal المحمية بإطار ملون وأيقونات Font Awesome -->
+    <div id="wv-custom-modal" class="wv-modal-backdrop">
+        <div class="wv-modal-box">
+            <div id="wv-modal-icon-bg" class="wv-modal-icon-bg">
+                <span id="wv-modal-icon" class="wv-modal-icon"></span>
+            </div>
+            <h3 id="wv-modal-title" class="wv-modal-title">تنبيه النظام</h3>
+            <p id="wv-modal-message" class="wv-modal-message">تفاصيل رسالة التنبيه الافتراضية هنا.</p>
+            <div class="wv-modal-actions">
+                <button id="wv-btn-cancel" class="wv-btn wv-btn-cancel">إلغاء</button>
+                <button id="wv-btn-confirm" class="wv-btn wv-btn-confirm">تأكيد</button>
+            </div>
+        </div>
+    </div>
+
+    <script>    
+        const firebaseConfig = {
+            apiKey: "AIzaSyA1...",
+            authDomain: "lababidi-math.firebaseapp.com",
+            databaseURL: "https://lababidimath-74afd-default-rtdb.firebaseio.com/",
+            projectId: "lababidi-math",
+            storageBucket: "lababidi-math.appspot.com",
+            messagingSenderId: "852...",
+            appId: "1:852..."
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        const PROF_WHATSAPP_NUMBER = "9639XXXXXXXX"; 
+
+        const tabNamesMapping = {
+            "primary": "المرحلة الابتدائية ✏️",
+            "preparatory": "المرحلة الإعدادية 📐",
+            "bac_scientific": "البكالوريا العلمية 📐",
+            "bac_literary": "البكالوريا الأدبية (الإحصاء) 📊",
+            "vectors_pack": "الاشعة 🧭",
+            "algebra_pack": "حزمة الجبر والتحليل 🔢"
+        };
+
+        let globalDatabaseTabs = {};
+        let currentStudentDataCache = null;
+
+        function normalizeArabic(str) {
+            if (!str) return "";
+            return str.toString().trim()
+                .toLowerCase()
+                .replace(/[أإآا]/g, 'ا')
+                .replace(/ة/g, 'ه')
+                .replace(/ى/g, 'ي')
+                .replace(/[-_]/g, '')
+                .replace(/\s+/g, '');
+        }
+
+        // 🛠️ دالة تحكم النافذة الاحترافية المحدثة لتقبل أكواد HTML للأيقونات
+        function showPlatformModal(options) {
+            const backdrop = document.getElementById('wv-custom-modal');
+            const iconBg = document.getElementById('wv-modal-icon-bg');
+            const iconEl = document.getElementById('wv-modal-icon');
+            const titleEl = document.getElementById('wv-modal-title');
+            const msgEl = document.getElementById('wv-modal-message');
+            const btnConfirm = document.getElementById('wv-btn-confirm');
+            const btnCancel = document.getElementById('wv-btn-cancel');
+
+            // إدراج الأيقونة كـ HTML للاستفادة الكاملة من كلاسات Font Awesome المحدثة
+            iconEl.innerHTML = options.icon || '<i class="fa-solid fa-triangle-exclamation"></i>';
+            titleEl.innerText = options.title || "تنبيه";
+            msgEl.innerText = options.message || "";
+            btnConfirm.innerText = options.confirmText || "موافق";
+
+            // إدارة تنسيق الألوان بناءً على خطورة الإجراء 
+            if (options.isDanger) {
+                btnConfirm.style.background = "var(--danger-color)";
+                btnConfirm.style.color = "#ffffff";
+                iconBg.style.background = "rgba(244, 63, 94, 0.12)";
+                iconBg.style.color = "var(--danger-color)";
+            } else {
+                btnConfirm.style.background = "var(--primary-color)";
+                btnConfirm.style.color = "var(--btn-text)";
+                iconBg.style.background = "rgba(6, 182, 212, 0.12)";
+                iconBg.style.color = "var(--primary-color)";
+            }
+
+            if (options.showCancel) {
+                btnCancel.style.display = "inline-flex";
+                btnCancel.innerText = options.cancelText || "إلغاء";
+            } else {
+                btnCancel.style.display = "none";
+            }
+
+            btnConfirm.onclick = function() {
+                backdrop.classList.remove('active');
+                if(typeof options.onConfirm === 'function') options.onConfirm();
+            };
+
+            btnCancel.onclick = function() {
+                backdrop.classList.remove('active');
+                if(typeof options.onCancel === 'function') options.onCancel();
+            };
+
+            backdrop.classList.add('active');
+        }
+
+        function listenToStudentStatus() {
+            const savedPhone = localStorage.getItem('student_phone') || localStorage.getItem('user_phone');
+            const savedGov = localStorage.getItem('user_governorate') || "غير محددة";
+            
+            const nameDisplay = document.getElementById('student-name-display');
+            const phoneDisplay = document.getElementById('student-phone-display');
+            const govDisplay = document.getElementById('student-governorate-display');
+            const subsContainer = document.getElementById('student-subscriptions-container');
+            const vipManagementCard = document.getElementById('vip-management-card');
+            const vipInteractiveArea = document.getElementById('vip-interactive-area');
+
+            govDisplay.innerText = savedGov;
+
+            if (!savedPhone) {
+                nameDisplay.innerText = "طالب زائر";
+                phoneDisplay.innerText = "لا يوجد رقم محفوظ";
+                localStorage.setItem("user_tier", "normal");
+                
+                vipManagementCard.classList.remove('vip-active-card');
+                vipInteractiveArea.innerHTML = `
+                    <p style="font-size: 0.85rem; opacity: 0.7; margin: 0 0 10px 0; line-height: 1.4;">
+                        تواصل مباشرة مع الأستاذ محمد لبابيدي لتفعيل باقة VIP الشاملة وفتح كافة نوط وملفات المنصة فوراً.
+                    </p>
+                    <a href="https://wa.me/${PROF_WHATSAPP_NUMBER}?text=مرحباً أستاذ محمد، أنا طالب زائر في المنصة وأود الاستفسار عن طريقة الاشتراك وتفعيل الحساب." target="_blank" class="btn-vip-gold">
+                        <i class="fa-solid fa-crown"></i> طلب تفعيل باقة VIP الشاملة
+                    </a>
+                `;
+                
+                renderFreeAndLocalTabs(subsContainer);
+                return;
+            }
+
+            const cleanPhone = savedPhone.replace(/\s+/g, '');
+
+            db.ref('tabs').on('value', (tabsSnap) => {
+                globalDatabaseTabs = tabsSnap.val() || {};
+                if (currentStudentDataCache) {
+                    renderStudentSubscriptionsUI(cleanPhone, currentStudentDataCache, subsContainer, vipManagementCard, vipInteractiveArea, nameDisplay, phoneDisplay, govDisplay);
+                } else {
+                    renderFreeAndLocalTabs(subsContainer);
+                }
+            });
+
+            db.ref('students/' + cleanPhone).on('value', (snap) => {
+                if (snap.exists()) {
+                    currentStudentDataCache = snap.val();
+                    renderStudentSubscriptionsUI(cleanPhone, currentStudentDataCache, subsContainer, vipManagementCard, vipInteractiveArea, nameDisplay, phoneDisplay, govDisplay);
+                } else {
+                    currentStudentDataCache = null;
+                    // تم تحديث أيقونة الحظر لأيقونة قفل حماية احترافية
+                    showPlatformModal({
+                        icon: '<i class="fa-solid fa-user-lock"></i>',
+                        title: "تنبيه انتهاء الاشتراك",
+                        message: "تنبيه: لم يعد هذا الحساب نشطاً أو تم إيقاف تفعيلك من قبل الإدارة.",
+                        confirmText: "إغلاق الجلسة",
+                        showCancel: false,
+                        isDanger: true,
+                        onConfirm: function() {
+                            executeLogoutProcess();
+                        }
+                    });
+                }
+            });
+        }
+
+        function renderFreeAndLocalTabs(subsContainer) {
+            subsContainer.innerHTML = "";
+            let activeSubsCount = 0;
+            let displayedKeys = new Set();
+            for (let tabKey in globalDatabaseTabs) {
+                const tabData = globalDatabaseTabs[tabKey];
+                if (tabData.isFree === true || tabData.isFree === "true" || tabData.accessType === "free" || tabData.accessType === "unlocked") {
+                    activeSubsCount++;
+                    displayedKeys.add(tabKey);
+                    subsContainer.insertAdjacentHTML('beforeend', `<div class="sub-item-badge free-badge"><i class="fa-solid fa-lock-open"></i> ${tabData.name || 'قسم عام'} (مفتوح للجميع)</div>`);
+                }
+            }
+            for (let i = 0; i < localStorage.length; i++) {
+                const localKey = localStorage.key(i);
+                if (localKey && localKey.startsWith('unlocked_')) {
+                    const tabKey = localKey.replace('unlocked_', '');
+                    if (displayedKeys.has(tabKey)) continue;
+                    let displayName = globalDatabaseTabs[tabKey]?.name || tabNamesMapping[tabKey] || tabKey;
+                    activeSubsCount++;
+                    displayedKeys.add(tabKey);
+                    subsContainer.insertAdjacentHTML('beforeend', `<div class="sub-item-badge"><i class="fa-solid fa-key"></i> ${displayName} (مفعل بكود 🔑)</div>`);
+                }
+            }
+            if (activeSubsCount === 0) subsContainer.innerHTML = `<div class="no-subs-text"><i class="fa-solid fa-lock"></i> لا توجد باقات نشطة حالياً.</div>`;
+        }
+
+        function renderStudentSubscriptionsUI(cleanPhone, serverData, subsContainer, vipManagementCard, vipInteractiveArea, nameDisplay, phoneDisplay, govDisplay) {
+            subsContainer.innerHTML = "";
+            const isExplicitlyDeactivated = serverData.status === 'غير نشط' || serverData.status === 'inactive' || serverData.status === 'منتهي' || serverData.status === 'blocked';
+            let isAccountOpen = !isExplicitlyDeactivated && (serverData.status === 'active' || serverData.status === 'نشط' || serverData.status === 'vip' || serverData.status === 'VIP' || serverData.active === true || serverData.active === 'true' || (serverData.allowedTabs && Object.keys(serverData.allowedTabs).length > 0));
+            const isVipActive = !isExplicitlyDeactivated && (serverData.status === 'vip' || serverData.status === 'VIP' || serverData.vip === true || serverData.vip === 'true' || serverData.isVip === true);
+            nameDisplay.innerText = serverData.name || "طالب متميز";
+            phoneDisplay.innerText = serverData.phone || cleanPhone;
+            
+            const currentGov = serverData.governorate || serverData.province || localStorage.getItem('user_governorate') || "غير محددة";
+            govDisplay.innerText = currentGov;
+            localStorage.setItem('user_governorate', currentGov);
+
+            if (isVipActive) {
+                localStorage.setItem("user_tier", "vip");
+                vipManagementCard.classList.add('vip-active-card');
+                vipInteractiveArea.innerHTML = `<div style="display: flex; align-items: center; gap: 10px; color: #d97706; font-weight: bold; font-size: 0.95rem; padding: 5px 0;"><i class="fa-solid fa-circle-check" style="font-size: 1.2rem;"></i> باقة VIP الشاملة نشطة الآن 🎉</div>`;
+            } else {
+                localStorage.setItem("user_tier", "normal");
+                vipManagementCard.classList.remove('vip-active-card');
+                const waMsg = encodeURIComponent(`مرحباً أستاذ محمد لبابيدي، أنا الطالب (${serverData.name || 'غير محدد'})، رقم هاتفي هو (${cleanPhone})، وأود تفعيل باقة VIP الشاملة.`);
+                vipInteractiveArea.innerHTML = `<p style="font-size: 0.85rem; opacity: 0.7; margin: 0 0 10px 0; line-height: 1.4;">تواصل مباشرة مع الأستاذ محمد لبابيدي لتفعيل باقة VIP الشاملة.</p><a href="https://wa.me/${PROF_WHATSAPP_NUMBER}?text=${waMsg}" target="_blank" class="btn-vip-gold"><i class="fa-solid fa-crown"></i> طلب تفعيل باقة VIP الشاملة</a>`;
+            }
+
+            if (isAccountOpen) {
+                let activeSubsCount = 0;
+                let displayedKeys = new Set();
+                for (let tabKey in globalDatabaseTabs) {
+                    const tabData = globalDatabaseTabs[tabKey];
+                    if (tabData.isFree === true || tabData.isFree === "true" || tabData.accessType === "free" || tabData.accessType === "unlocked") {
+                        activeSubsCount++;
+                        displayedKeys.add(tabKey);
+                        subsContainer.insertAdjacentHTML('beforeend', `<div class="sub-item-badge free-badge"><i class="fa-solid fa-lock-open"></i> ${tabData.name || 'قسم عام'} (مفتوح للجميع)</div>`);
+                    }
+                }
+                const combinedTabs = {};
+                if (isVipActive) { for (let k in globalDatabaseTabs) combinedTabs[k] = { source: "vip" }; }
+                else if (serverData.allowedTabs) { for (let k in serverData.allowedTabs) if (serverData.allowedTabs[k] === true || serverData.allowedTabs[k] === "true") combinedTabs[k] = { source: "server" }; }
+                for (let i = 0; i < localStorage.length; i++) {
+                    const localKey = localStorage.key(i);
+                    if (localKey && localKey.startsWith('unlocked_')) {
+                        const tabKey = localKey.replace('unlocked_', '');
+                        if (!combinedTabs[tabKey]) combinedTabs[tabKey] = { source: "code" };
+                    }
+                }
+                for (let tabKey in combinedTabs) {
+                    activeSubsCount++;
+                    let iconClass = combinedTabs[tabKey].source === "vip" ? "fa-crown" : "fa-key";
+                    let suffix = combinedTabs[tabKey].source === "vip" ? " (VIP 🌟)" : " (مفعل)";
+                    subsContainer.insertAdjacentHTML('beforeend', `<div class="sub-item-badge"><i class="fa-solid ${iconClass}"></i> ${globalDatabaseTabs[tabKey]?.name || tabNamesMapping[tabKey] || tabKey}${suffix}</div>`);
+                }
+            } else {
+                subsContainer.innerHTML = `<div class="no-subs-text" style="color: var(--danger-color);"><i class="fa-solid fa-lock"></i> تم تجميد الحساب والباقات بالكامل.</div>`;
+            }
+        }
+
+        // استدعاء نافذة التأكيد بأيقونة الخروج المتطورة (Font Awesome)
+        function logoutStudent() {
+            showPlatformModal({
+                icon: '<i class="fa-solid fa-right-from-bracket"></i>', // هنا تم حقن الأيقونة الاحترافية للباب والخروج
+                title: "تسجيل الخروج",
+                message: "هل أنت متأكد من رغبتك في تسجيل الخروج؟ سيتم مسح صلاحيات الوصول المؤقتة من هذا الجهاز فوراً.",
+                confirmText: "تأكيد الخروج",
+                cancelText: "إلغاء",
+                showCancel: true,
+                isDanger: true,
+                onConfirm: function() {
+                    executeLogoutProcess();
+                }
+            });
+        }
+
+        function executeLogoutProcess() {
+            db.ref().off();
+            const keysToRemove = [
+                "user_logged_in", "student_key", "student_phone", 
+                "user_phone", "user_name", "user_governorate", "user_tier"
+            ];
+            
+            keysToRemove.forEach(key => localStorage.removeItem(key));
+
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith('unlocked_')) localStorage.removeItem(key);
+            });
+
+            localStorage.setItem('currentStudent', JSON.stringify({ name: "طالب زائر", isActivated: false, allowedTabs: {} }));
+
+            setTimeout(() => {
+                window.location.href = "login1.html";
+            }, 100);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const generalWa = document.getElementById('general-wa-link');
+            if(generalWa) generalWa.href = `https://wa.me/${PROF_WHATSAPP_NUMBER}`;
+            
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            if (localStorage.getItem('platform-theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                if(darkModeToggle) darkModeToggle.checked = true;
+            }
+            if(darkModeToggle) {
+                darkModeToggle.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        document.body.classList.add('dark-mode');
+                        localStorage.setItem('platform-theme', 'dark');
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                        localStorage.setItem('platform-theme', 'light');
+                    }
+                });
+            }
+            listenToStudentStatus();
+        });
+    </script>
+</body>
+</html>
