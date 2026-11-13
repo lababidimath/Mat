@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>الرياضيات – السابع – الوحدة الأولى: الأعداد والعمليات</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#F2F7F9;--card:#fff;--ink:#12303B;--mut:#587480;--line:#D5E3E8;--ac:#0E7C86;--acs:#DDF1F2;
+--def:#E3F1FA;--rule:#FFF1D1;--ex:#E2F4E8;--pr:#EDE8FA;--defb:#2B7FB5;--ruleb:#C8890A;--exb:#2E8B57;--prb:#6A55B8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0D1D24;--card:#142932;--ink:#E6F2F5;--mut:#9DB6BF;--line:#244551;--ac:#4FC3CC;--acs:#17414A;
+--def:#14324A;--rule:#40320F;--ex:#143A27;--pr:#2B2552;--defb:#6DB7E8;--ruleb:#F2B134;--exb:#58C98A;--prb:#A996F0}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0D1D24;--card:#142932;--ink:#E6F2F5;--mut:#9DB6BF;--line:#244551;--ac:#4FC3CC;--acs:#17414A;
+--def:#14324A;--rule:#40320F;--ex:#143A27;--pr:#2B2552;--defb:#6DB7E8;--ruleb:#F2B134;--exb:#58C98A;--prb:#A996F0}
+*{box-sizing:border-box}
+html{font-size:18px;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,'Segoe UI',Tahoma,sans-serif;line-height:1.9;min-height:100vh}
+body.big{font-size:1.28rem}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:2px solid var(--line);padding:8px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+header h1{font-size:1.05rem;margin:0;font-weight:800;flex:1;min-width:180px}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav button,.tools button{font:inherit;font-size:.85rem;border:2px solid var(--line);background:var(--card);color:var(--ink);padding:2px 12px;border-radius:999px;cursor:pointer}
+nav button[aria-current=true]{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+nav button:focus-visible,.tools button:focus-visible,summary:focus-visible,.nx button:focus-visible{outline:3px solid var(--ruleb);outline-offset:2px}
+.tools{display:flex;gap:6px}
+main{max-width:980px;margin:0 auto;padding:18px 16px 70px}
+h2{font-size:1.9rem;margin:.2rem 0 .3rem;font-weight:800;color:var(--ac)}
+.sub{color:var(--mut);margin:0 0 14px}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}
+.hc{background:var(--card);border:2px solid var(--line);border-inline-start:8px solid var(--c);border-radius:10px;padding:12px 16px;text-align:start;font:inherit;color:inherit;cursor:pointer}
+.hc b{display:block;font-size:1.15rem}.hc span{color:var(--mut);font-size:.9rem}
+.blk{border-radius:10px;padding:12px 18px;margin:14px 0;border-inline-start:8px solid}
+.blk h3{margin:0 0 4px;font-size:1.08rem;font-weight:800}
+.d{background:var(--def);border-color:var(--defb)}.d h3{color:var(--defb)}
+.r{background:var(--rule);border-color:var(--ruleb)}.r h3{color:var(--ruleb)}
+.e{background:var(--ex);border-color:var(--exb)}.e h3{color:var(--exb)}
+.p{background:var(--pr);border-color:var(--prb)}.p h3{color:var(--prb)}
+.blk p{margin:.2rem 0}
+.m{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:'Times New Roman',Georgia,serif;font-size:1.18em;white-space:nowrap}
+.ex-line{padding:2px 0;border-bottom:1px dashed var(--line)}.ex-line:last-child{border:0}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 3px}
+.fr i{font-style:normal;padding:0 3px}.fr i:first-child{border-bottom:1.5px solid currentColor}
+table{border-collapse:collapse;margin:8px 0;width:100%}
+td,th{border:2px solid var(--line);padding:4px 10px;text-align:center}
+th{background:var(--acs)}
+details{margin:6px 0}summary{cursor:pointer;font-weight:600}
+details .a{background:var(--card);border-radius:8px;padding:2px 12px;margin-top:4px}
+.w{background:var(--card);border:2px solid var(--line);border-radius:10px;padding:12px 16px;margin:14px 0}
+.w h3{margin:0 0 6px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+input,select{font:inherit;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:2px 8px;width:90px;direction:ltr;text-align:center}
+select{width:auto}
+svg{max-width:100%;height:auto;display:block;margin:8px auto}
+svg text{fill:var(--ink);font-family:Cairo,sans-serif}
+.nx{display:flex;justify-content:space-between;margin-top:26px}
+.nx button{font:inherit;font-weight:600;border:0;background:var(--ac);color:#fff;border-radius:999px;padding:6px 22px;cursor:pointer}
+.nx button[hidden]{visibility:hidden;display:block}
+.sets{display:flex;justify-content:center;gap:0;margin:8px 0}
+.sets div{border:3px solid var(--ac);border-radius:14px;padding:6px 14px;background:var(--acs);text-align:center}
+.res{font-size:1.25rem;font-weight:800;color:var(--ac)}
+@media (prefers-reduced-motion:no-preference){main{animation:in .25s ease}@keyframes in{from{opacity:.4}to{opacity:1}}}
+@media (max-width:600px){html{font-size:16px}h2{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<header>
+<h1>الرياضيات – السابع | الوحدة الأولى: الأعداد والعمليات</h1>
+<nav id="nav" aria-label="الدروس"></nav>
+<div class="tools"><button id="fs" title="تكبير الخط">عرض كبير</button><button id="th" title="تبديل الوضع">فاتح / داكن</button></div>
+</header>
+<main id="main"></main>
+<script>
+var C=['#0E7C86','#2B7FB5','#C8890A','#2E8B57','#6A55B8','#D4572E'];
+function M(s){return s.replace(/\$([^$]+)\$/g,function(_,t){
+ t=t.replace(/\{([^|}]+)\|([^}]+)\}/g,'<span class="fr"><i>$1</i><i>$2</i></span>').replace(/\^\{([^}]+)\}/g,'<sup>$1</sup>').replace(/(^|[^a-zA-Z<\/])-(?=[\d({<])/g,'$1\u2212').replace(/ - /g,' \u2212 ');
+ return '<span class="m">'+t+'</span>'})}
+function B(k,t,body){return '<div class="blk '+k+'"><h3>'+t+'</h3>'+M(body)+'</div>'}
+function E(t,a){return B('e',t,a.map(function(x){return '<div class="ex-line">'+x+'</div>'}).join(''))}
+function P(a){return B('p','حاول بنفسك',a.map(function(x){return '<details><summary>'+x[0]+'</summary><div class="a">'+x[1]+'</div></details>'}).join(''))}
+
+var L=[
+{t:'الأعداد الطبيعية',s:'المجموعة ℕ وقيمة الرقم حسب منزلته',w:'',b:function(){return [
+B('d','مجموعة الأعداد الطبيعية ℕ','<p>العدد الطبيعي هو العدد الذي نعدّ به أشياء مثل 0، 1، 2، 3... ونرمز للمجموعة بالرمز ℕ:</p><p>$ℕ = {0, 1, 2, 3, 4, 5, ...}$</p><p>كل عدد طبيعي نمثّله بنقطة على مستقيم مدرّج، وبعد النقطة عن الصفر يساوي العدد نفسه.</p>'),
+B('d','قيمة الرقم حسب منزلته','<p>قيمة الرقم تتغيّر بحسب المنزلة التي يقع فيها. في العدد $143282$ قيمة الرقم 4 هي $40000$ لأنه في منزلة عشرات الألوف.</p>'),
+'<div class="w"><h3>جدول المنازل: العدد 83000050002</h3><table><tr><th>مليارات</th><th>ملايين</th><th>ألوف</th><th>وحدات</th></tr><tr><td class="m">83</td><td class="m">000</td><td class="m">050</td><td class="m">002</td></tr></table></div>',
+E('ثلاث طرق لكتابة العدد نفسه',['الصيغة العددية: $83000050002$','الصيغة اللفظية: ثلاثة وثمانون ملياراً وخمسون ألفاً واثنان','الصيغة الإيضاحية: $8×10^{10} + 3×10^{9} + 5×10^{4} + 2$']),
+P([['ما قيمة الرقم 2 في العدد $1235698743$؟','$200000000$ (مئتا مليون)'],['اكتب بالصيغة العددية: 4 مليارات و 503 ملايين و 444 ألفاً','$4503444000$']])]}},
+
+{t:'الصحيحة: الجمع والطرح',s:'المجموعة ℤ ومستقيم الأعداد',w:'nl',b:function(){return [
+B('d','مجموعة الأعداد الصحيحة ℤ','<p>تضم الأعداد الطبيعية ومعاكساتها السالبة:</p><p>$ℤ = {..., -3, -2, -1, 0, 1, 2, 3, ...}$</p><p>• كل عدد موجب أكبر من الصفر، وكل عدد سالب أصغر منه.<br>• قيمة الأعداد تزداد كلما اتجهنا يميناً على المستقيم.<br>• معاكس العدد يبعد عن الصفر المسافة نفسها في الجهة المقابلة.</p>'),
+B('r','قاعدة: جمع عددين صحيحين','<p><b>الإشارة نفسها:</b> نجمع المقدارين (القيمتين دون إشارة) ونبقي الإشارة المشتركة.</p><p><b>إشارتان مختلفتان:</b> نطرح الأصغر مقداراً من الأكبر، ونضع إشارة العدد الأبعد عن الصفر.</p><p>ناتج جمع عدد ومعاكسه $= 0$ ، مثل $(+3)+(-3) = 0$</p>'),
+E('أمثلة على الجمع',['$(-13) + (-5) = -18$ ← الإشارة نفسها: 13+5 والإشارة سالبة','$(+8) + (-11) = -3$ ← إشارتان مختلفتان: 11−8 وإشارة 11 سالبة','$-5 + 8 = +3$ ← كتابة مختصرة بحذف الأقواس']),
+B('r','قاعدة: الطرح','<p>لطرح عدد من آخر نجمع معاكس المطروح مع المطروح منه:</p><p>$a - b = a + (-b)$</p>'),
+E('أمثلة على الطرح',['$(-4) - (+2) = (-4) + (-2) = -6$','$(-2) - (-7) = (-2) + (+7) = +5$','$8 - (+2) = 8 + (-2) = 6$']),
+B('d','خواص العمليتين','<p>الجمع تبديلي: $a + b = b + a$ وتجميعي: $(a+b)+c = a+(b+c)$.</p><p>الطرح ليس تبديلياً ولا تجميعياً: $4 - 6 ≠ 6 - 4$ لأن الأول $-2$ والثاني $+2$.</p>'),
+P([['احسب $(-25) + (+13)$','$-12$'],['احسب $(-7) - (-15)$','$+8$'],['احسب $-9 + 7 + 2 - 5$','$-5$']])]}},
+
+{t:'الصحيحة: الضرب والقسمة',s:'قاعدة الإشارات',w:'',b:function(){return [
+B('r','قاعدة: ضرب عددين صحيحين','<p>1) نضرب العددين دون النظر إلى إشارتيهما.<br>2) الناتج موجب ( + ) إذا كان العددان بالإشارة نفسها، وسالب ( − ) إذا اختلفت إشارتاهما.</p>'),
+'<div class="w"><h3>جدول الإشارات</h3><table><tr><th>العامل الأول</th><th>العامل الثاني</th><th>الناتج</th></tr><tr><td>+</td><td>+</td><td class="m">+</td></tr><tr><td>−</td><td>−</td><td class="m">+</td></tr><tr><td>+</td><td>−</td><td class="m">−</td></tr><tr><td>−</td><td>+</td><td class="m">−</td></tr></table><p>عند ضرب عدة أعداد: إذا كان عدد العوامل السالبة <b>زوجياً</b> فالناتج موجب، وإن كان <b>فردياً</b> فالناتج سالب.</p></div>',
+E('أمثلة على الضرب',['$(-4) × (-5) = +20$','$(-7) × (+2) = -14$','$(-2)(-3)(-4) = -24$ ← ثلاثة عوامل سالبة (عدد فردي)']),
+B('d','خواص الضرب','<p>الضرب تبديلي وتجميعي في ℤ. وأيضاً: $a × 0 = 0$ و $a × 1 = a$.</p>'),
+B('r','قاعدة: القسمة','<p>قاعدة الإشارات نفسها: نقسم دون إشارتين، والناتج موجب إذا تشابهت الإشارتان وسالب إذا اختلفتا. شرط القسمة: المقسوم عليه <b>لا يساوي صفراً</b>.</p><p>القسمة ليست تبديلية ولا تجميعية.</p>'),
+E('أمثلة على القسمة',['$(-24) ÷ (-2) = +12$','$(+8) ÷ (-8) = -1$','${-48|-6} = +8$']),
+P([['احسب $(-12) × (+5)$','$-60$'],['احسب $(-72) ÷ (-9)$','$+8$'],['احسب $(-36) ÷ (-4) - 5 × (-2)$','$9 + 10 = 19$']])]}},
+
+{t:'الأعداد العادية',s:'المجموعة ℚ والمقارنة والترتيب',w:'',b:function(){return [
+B('d','مجموعة الأعداد العادية ℚ','<p>كل عدد يمكن كتابته على الشكل $%{a|b}%$ حيث a و b عددان صحيحان و $b ≠ 0$ هو عدد عادي، ونرمز للمجموعة بالرمز ℚ.</p><p>أمثلة: $%{-1|2}%$ ، $%{5|4}%$ ، $0.03 = {3|100}$ ، $1{1|4} = {5|4} = 1.25$.</p>'.replace(/%/g,'')),
+'<div class="w"><h3>ℕ داخل ℤ داخل ℚ</h3><div class="sets"><div>ℚ<div style="margin-top:6px;background:var(--def)">ℤ<div style="margin-top:6px;background:var(--ex)">ℕ</div></div></div></div><p style="text-align:center;margin:0">كل عدد طبيعي هو صحيح، وكل عدد صحيح هو عادي. مثلاً $-7 = {-7|1}$.</p></div>',
+B('r','المقارنة والترتيب','<p>• العدد الموجب أكبر من كل عدد سالب.<br>• تزداد قيمة الأعداد العادية من اليسار إلى اليمين على المستقيم المدرّج.<br>• للمقارنة بين كسرين: نوحّد المقامين (بالمضاعف المشترك الأصغر) ثم نقارن البسطين.</p>'),
+E('مقارنة $-{13|15}$ و $-{19|21}$',['المضاعف المشترك الأصغر للمقامين 15 و 21 هو 105','$-{13|15} = -{91|105}$ و $-{19|21} = -{95|105}$','لأن $-91 > -95$ فإن $-{13|15} > -{19|21}$']),
+E('ترتيب أعداد على المستقيم',['$-2 < -1.25 < -{1|2} < 0 < 1 < {5|4} < 2$']),
+P([['قارن بين $-{3|4}$ و $-{5|6}$','$-{9|12} > -{10|12}$ إذن $-{3|4} > -{5|6}$'],['رتّب تصاعدياً: $0.5$ ، $-0.75$ ، $-{5|4}$','$-{5|4} < -0.75 < 0.5$']])]}},
+
+{t:'العمليات على الأعداد العادية',s:'الترميز العلمي والعمليات الأربع',w:'',b:function(){return [
+B('d','الترميز العلمي','<p>نكتب العدد الكبير على الشكل: عدد عشري × قوة للعدد 10، حيث الجزء الصحيح من العدد العشري رقم واحد فقط غير الصفر.</p><p>الطريقة: نضع الفاصلة بعد أول رقم، ونعدّ المنازل التي انتقلت إليها الفاصلة، فيكون هذا العدد هو الأس.</p>'),
+E('أمثلة',['$150000000 = 1.5 × 10^{8}$','$315000000 = 3.15 × 10^{8}$','$4518000000 = 4.518 × 10^{9}$']),
+B('r','قاعدة: العمليات على الكسور','<p>• نجعل المقام موجباً أولاً: ${-5|-6} = {5|6}$.<br>• الجمع والطرح: نوحّد المقامات ثم نجمع أو نطرح البسطين.<br>• الضرب: بسط × بسط ، مقام × مقام.<br>• القسمة: نضرب في <b>مقلوب</b> المقسوم عليه.</p><p>الأعداد العشرية: نجري العملية كالأعداد الصحيحة ثم نضع الفاصلة (في الضرب نعدّ المنازل العشرية في العاملين).</p>'),
+E('أمثلة محلولة',['$-{4|9} + {7|18} = -{8|18} + {7|18} = -{1|18}$','$2{1|5} - 3{5|6} = {11|5} - {23|6} = {66|30} - {115|30} = -{49|30}$','$(-{5|6}) ÷ (-{10|9}) = {5|6} × {9|10} = {45|60} = {3|4}$','$12.3 - 15.7 = -3.4$','$(-5.14) × (+7.2) = -37.008$ ← 514×72 = 37008 ثم 3 منازل عشرية']),
+P([['احسب $-{1|2} + {3|4}$','$-{2|4} + {3|4} = {1|4}$'],['احسب $(-{7|3}) × (-{3|14})$','${21|42} = {1|2}$'],['اكتب $2250000000$ بالترميز العلمي','$2.25 × 10^{9}$']])]}},
+
+{t:'معلم المستوي',s:'الإحداثيات والأرباع',w:'cp',b:function(){return [
+B('d','المحوران والمبدأ','<p>مستقيمان مدرّجان متعامدان يتقاطعان في نقطة تُسمّى <b>المبدأ</b> ونرمز لها بـ O وإحداثياتها $(0, 0)$.</p><p>• المحور الأفقي Ox: محور <b>الفواصل</b>.<br>• المحور الشاقولي Oy: محور <b>التراتيب</b>.</p><p>لكل نقطة M إحداثيان: الفاصلة x ثم الترتيب y، ونكتب $M(x, y)$.</p>'),
+B('r','الأرباع الأربعة','<table><tr><th>الربع</th><th>الفاصلة</th><th>الترتيب</th></tr><tr><td>الأول</td><td class="m">+</td><td class="m">+</td></tr><tr><td>الثاني</td><td class="m">−</td><td class="m">+</td></tr><tr><td>الثالث</td><td class="m">−</td><td class="m">−</td></tr><tr><td>الرابع</td><td class="m">+</td><td class="m">−</td></tr></table>'),
+E('أمثلة',['$M(-2, 3)$ ← الربع الثاني (فاصلة سالبة وترتيب موجب)','$F(3, 1)$ ← الربع الأول','$N(4, 0)$ ← على محور الفواصل (الترتيب صفر)','$E(0, -3)$ ← على محور التراتيب (الفاصلة صفر)']),
+P([['أين تقع النقطة $(-4, -1)$؟','في الربع الثالث'],['أين تقع النقطة $(0, 5)$؟','على محور التراتيب'],['في أي ربع تقع $(3, -2)$؟','في الربع الرابع']])]}}
+];
+
+var cur=0,$=function(i){return document.getElementById(i)};
+function nlW(){return '<div class="w"><h3>جرّب على مستقيم الأعداد</h3><div class="row"><input id="a" type="number" value="-4"><select id="o"><option value="+">+</option><option value="-">−</option></select><input id="b" type="number" value="6"><span class="res m" id="rs"></span></div><svg id="nl" viewBox="0 0 640 110" role="img" aria-label="مستقيم الأعداد"></svg></div>'}
+function nlDraw(){var a=+$('a').value||0,b=+$('b').value||0,o=$('o').value,r=o=='+'?a+b:a-b;$('rs').textContent=a+' '+(o=='+'?'+':'\u2212')+' ('+b+') = '+r;
+ var x=function(v){return 320+Math.max(-12,Math.min(12,v))*24},s='<line x1="20" y1="70" x2="620" y2="70" stroke="currentColor" stroke-width="2"/>';
+ for(var i=-12;i<=12;i++)s+='<line x1="'+x(i)+'" y1="64" x2="'+x(i)+'" y2="76" stroke="currentColor"/>'+(i%2==0?'<text x="'+x(i)+'" y="98" text-anchor="middle" font-size="13">'+i+'</text>':'');
+ var m=(x(a)+x(r))/2;s+='<path d="M'+x(a)+' 62 Q'+m+' 10 '+x(r)+' 62" fill="none" stroke="#D4572E" stroke-width="3" marker-end="url(#h)"/><defs><marker id="h" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#D4572E"/></marker></defs><circle cx="'+x(a)+'" cy="70" r="7" fill="#2B7FB5"/><circle cx="'+x(r)+'" cy="70" r="7" fill="#2E8B57"/>';
+ $('nl').innerHTML=s}
+function cpW(){return '<div class="w"><h3>اضغط على المستوي لتحديد نقطة</h3><div class="res m" id="cr">M(0, 0)</div><div id="cq" class="sub" style="margin:0"></div><svg id="cp" viewBox="0 0 340 340" role="img" aria-label="المستوي الإحداثي" style="max-width:420px;cursor:crosshair"></svg></div>'}
+function cpDraw(px,py){var u=30,o=170,s='',i;
+ s+='<rect x="'+(o)+'" y="10" width="150" height="150" fill="#2E8B57" opacity=".12"/><rect x="20" y="10" width="150" height="150" fill="#2B7FB5" opacity=".12"/><rect x="20" y="170" width="150" height="150" fill="#6A55B8" opacity=".12"/><rect x="170" y="170" width="150" height="150" fill="#C8890A" opacity=".12"/>';
+ for(i=-5;i<=5;i++){s+='<line x1="'+(o+i*u)+'" y1="20" x2="'+(o+i*u)+'" y2="320" stroke="currentColor" opacity=".15"/><line x1="20" y1="'+(o+i*u)+'" x2="320" y2="'+(o+i*u)+'" stroke="currentColor" opacity=".15"/>';
+  if(i)s+='<text x="'+(o+i*u)+'" y="'+(o+15)+'" font-size="11" text-anchor="middle">'+i+'</text><text x="'+(o-6)+'" y="'+(o-i*u+4)+'" font-size="11" text-anchor="end">'+i+'</text>'}
+ s+='<line x1="14" y1="'+o+'" x2="326" y2="'+o+'" stroke="currentColor" stroke-width="2.5"/><line x1="'+o+'" y1="326" x2="'+o+'" y2="14" stroke="currentColor" stroke-width="2.5"/><text x="332" y="'+(o-6)+'" font-size="14" text-anchor="end" font-weight="700">Ox</text><text x="'+(o+8)+'" y="20" font-size="14" font-weight="700">Oy</text><text x="'+(o-4)+'" y="'+(o+16)+'" font-size="12" text-anchor="end">O</text>';
+ s+='<text x="280" y="40" font-size="13" text-anchor="middle">الأول</text><text x="60" y="40" font-size="13" text-anchor="middle">الثاني</text><text x="60" y="310" font-size="13" text-anchor="middle">الثالث</text><text x="280" y="310" font-size="13" text-anchor="middle">الرابع</text>';
+ if(px!=null)s+='<circle cx="'+(o+px*u)+'" cy="'+(o-py*u)+'" r="8" fill="#D4572E"/>';
+ $('cp').innerHTML=s}
+function cpClick(e){var r=$('cp').getBoundingClientRect(),k=340/r.width,x=Math.round(((e.clientX-r.left)*k-170)/30),y=Math.round((170-(e.clientY-r.top)*k)/30);
+ if(Math.abs(x)>5||Math.abs(y)>5)return;cpDraw(x,y);$('cr').textContent='M('+x+', '+y+')';
+ $('cq').textContent=x==0&&y==0?'المبدأ O':x==0?'على محور التراتيب Oy':y==0?'على محور الفواصل Ox':'تقع في الربع '+(x>0&&y>0?'الأول':x<0&&y>0?'الثاني':x<0?'الثالث':'الرابع')}
+
+function show(n){cur=n;var h='',m=$('main');
+ [].forEach.call($('nav').children,function(b,i){b.setAttribute('aria-current',i==n)});
+ document.documentElement.style.setProperty('--ac',n?C[n-1]:'');
+ if(n==0){h='<h2>الوحدة الأولى: الأعداد والعمليات</h2><p class="sub">ستة دروس. اختر درساً للبدء، أو استخدم الأسهم في لوحة المفاتيح للتنقل.</p><div class="hero">'+L.map(function(l,i){return '<button class="hc" style="--c:'+C[i]+'" data-n="'+(i+1)+'"><b>'+(i+1)+'. '+l.t+'</b><span>'+l.s+'</span></button>'}).join('')+'</div>'}
+ else{var l=L[n-1];h='<h2>'+n+' – '+l.t+'</h2><p class="sub">'+l.s+'</p>'+l.b().join('');
+  if(l.w=='nl')h=h.replace(/(<div class="blk e">)/,nlW()+'$1');
+  if(l.w=='cp')h+=cpW();
+  h+='<div class="nx"><button data-n="'+(n>1?n-1:0)+'">السابق</button><button data-n="'+(n<6?n+1:0)+'">'+(n<6?'الدرس التالي':'القائمة')+'</button></div>'}
+ m.innerHTML=h;
+ if(n==2){['a','b','o'].forEach(function(i){$(i).oninput=nlDraw});nlDraw()}
+ if(n==6){cpDraw();$('cp').onclick=cpClick}
+ [].forEach.call(m.querySelectorAll('[data-n]'),function(b){b.onclick=function(){go(+b.dataset.n)}});
+ window.scrollTo(0,0)}
+function go(n){location.hash=n?'l'+n:'home'}
+function route(){var m=/^#l([1-6])$/.exec(location.hash);show(m?+m[1]:0)}
+var nv=$('nav');nv.innerHTML='<button data-h="1">الرئيسية</button>'+L.map(function(l,i){return '<button data-h="'+(i+1)+'">'+(i+1)+'. '+l.t+'</button>'}).join('');
+nv.firstChild.onclick=function(){go(0)};
+[].slice.call(nv.children,1).forEach(function(b,i){b.onclick=function(){go(i+1)}});
+(function(){var f=nv.firstChild;nv.removeChild(f);nv.insertBefore(f,nv.firstChild)})();
+window.addEventListener('hashchange',route);
+document.addEventListener('keydown',function(e){if(/INPUT|SELECT/.test(e.target.tagName))return;if(e.key=='ArrowLeft')go(Math.min(6,cur+1));if(e.key=='ArrowRight')go(Math.max(0,cur-1))});
+$('fs').onclick=function(){document.body.classList.toggle('big')};
+$('th').onclick=function(){var r=document.documentElement,d=getComputedStyle(r).colorScheme.indexOf('dark')>-1;r.setAttribute('data-theme',d?'light':'dark')};
+route();
+</script>
+</body>
+</html>
