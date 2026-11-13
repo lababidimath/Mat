@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>الميكانيك والطاقة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6f7;--card:#fff;--ink:#12303a;--mut:#52707a;--pri:#0f5c6e;--acc:#c9962b;--soft:#e2eef0;--line:#d3e2e5;--ok:#2f8f6b;--pad-t:env(safe-area-inset-top,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1b20;--card:#162830;--ink:#e6f0f2;--mut:#9db8bf;--pri:#5fc1d4;--acc:#e3b655;--soft:#1d3640;--line:#2a4852;--ok:#58c79a;color-scheme:dark}}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tajawal,Tahoma,sans-serif;line-height:1.9;font-size:17px}
+header{padding:34px 20px 20px;text-align:center;background:linear-gradient(160deg,var(--pri),#0a3e4b);color:#fff}
+header h1{margin:0;font-size:32px;font-weight:800}
+header p{margin:6px 0 0;opacity:.85}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px 16px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+nav button{flex:1 0 auto;font:inherit;font-weight:700;padding:8px 16px;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:24px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--pri);color:#fff;border-color:var(--pri)}
+nav button:focus-visible,summary:focus-visible,.opt:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+main{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+section{display:none}section.on{display:block}
+h2{font-size:26px;color:var(--pri);margin:8px 0 4px}
+h3{font-size:20px;margin:22px 0 6px;color:var(--pri)}
+.goal{background:var(--soft);border-right:5px solid var(--acc);padding:12px 18px;border-radius:10px;margin:12px 0}
+.goal ul{margin:4px 0;padding-right:20px}
+.law{background:var(--pri);color:#fff;border-radius:14px;padding:14px;text-align:center;font-size:24px;font-weight:700;margin:14px 0;direction:ltr}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 18px 14px;margin:14px 0}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:0 16px}
+summary{cursor:pointer;font-weight:700;padding:12px 0;color:var(--pri)}
+details[open]{border-color:var(--pri)}
+.key{border:2px dashed var(--acc);border-radius:12px;padding:10px 16px;margin:14px 0;background:var(--card)}
+.key b{color:var(--acc)}
+.lab{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:18px 0}
+.lab h4{margin:0 0 8px;color:var(--acc);font-size:19px}
+.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0}
+.row label{min-width:120px}
+input[type=range]{flex:1;min-width:140px;accent-color:var(--pri)}
+.val{font-weight:800;min-width:70px;direction:ltr;text-align:left}
+.bar{height:16px;background:var(--soft);border-radius:8px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+.bar i.p{background:var(--pri)}
+.out{font-weight:700;direction:ltr;text-align:center;font-size:20px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{font:inherit;padding:6px 16px;border-radius:20px;border:1px solid var(--line);background:var(--soft);color:var(--ink);cursor:pointer}
+.opt[aria-pressed=true]{background:var(--acc);color:#1b1500;border-color:var(--acc)}
+svg{width:100%;max-width:420px;display:block;margin:6px auto}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+td,th{border:1px solid var(--line);padding:6px 10px;text-align:center}
+th{background:var(--soft)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><h1>الميكانيك والطاقة</h1><p>الوحدة الثانية — شرح تفاعلي مفصّل</p></header>
+<nav role="tablist" id="tabs"></nav>
+<main>
+
+<section id="s0">
+<h2>١. عزم القوة</h2>
+<div class="goal"><b>أهداف الدرس:</b><ul><li>تعرّف مفهوم عزم القوة والعوامل المؤثرة فيه</li><li>استنتاج قانون عزم القوة</li><li>معرفة حالات انعدام العزم</li></ul></div>
+<h3>الحركة الانسحابية والدورانية</h3>
+<p>في علم الميكانيك تتحرك الأجسام حركة <b>انسحابية</b> (مسارها مستقيم، كانزلاق النافذة المنزلقة) أو حركة <b>دورانية</b> (مسارها دائري، كنافذة تدور حول مفاصلها أو الناعورة). في الحركة الدورانية يوجد خط ثابت يدور الجسم حوله يسمى <b>محور الدوران</b> (Δ).</p>
+<div class="key"><b>عزم القوة:</b> هو الفعل التدويري للقوة في الجسم حول محور دوران ثابت.</div>
+<h3>العوامل التي يتوقف عليها عزم القوة</h3>
+<details open><summary>١) شدة القوة</summary><p>كلما زادت شدة القوة المؤثرة زاد عزمها. عند تعليق ثقل أكبر بخيط يمر على بكرة تزداد القوة ويزداد الفعل التدويري.</p></details>
+<details open><summary>٢) ذراع القوة (d)</summary><p>هو البعد العمودي بين حامل القوة ومحور الدوران. فتح الباب بالدفع قرب المفصلات صعب، وبالدفع عند الطرف البعيد سهل، لأن ذراع القوة أكبر.</p></details>
+<h3>قانون عزم القوة</h3>
+<div class="law">Γ = d · F</div>
+<table><tr><th>الرمز</th><th>المعنى</th><th>الوحدة</th></tr><tr><td>Γ</td><td>عزم القوة</td><td>متر.نيوتن (m.N)</td></tr><tr><td>d</td><td>ذراع القوة</td><td>متر (m)</td></tr><tr><td>F</td><td>شدة القوة</td><td>نيوتن (N)</td></tr></table>
+<p>العزم يتناسب طرداً مع كل من شدة القوة وذراعها.</p>
+<div class="lab"><h4>جرّب بنفسك</h4>
+<div class="row"><label>شدة القوة F</label><input type="range" id="aF" min="0" max="100" value="40" oninput="calc('a')" aria-label="شدة القوة"><span class="val" id="aFv"></span></div>
+<div class="row"><label>ذراع القوة d</label><input type="range" id="ad" min="0" max="1" step="0.05" value="0.5" oninput="calc('a')" aria-label="ذراع القوة"><span class="val" id="adv"></span></div>
+<div class="bar"><i id="aB"></i></div><div class="out" id="aO"></div><p id="aN" style="text-align:center;color:var(--mut);margin:0"></p></div>
+<h3>إشارة العزم</h3>
+<p>نختار اتجاهاً موجباً للدوران: يكون العزم <b>موجباً</b> إذا دوّرت القوة الجسم بعكس اتجاه عقارب الساعة، و<b>سالباً</b> إذا دوّرته مع اتجاه عقارب الساعة. عند وجود عدة قوى نجمع عزومها جبرياً.</p>
+<h3>حالات انعدام عزم القوة</h3>
+<details open><summary>متى ينعدم العزم؟</summary><p>١) إذا كان حامل القوة <b>يلاقي محور الدوران</b> (d = 0).<br>٢) إذا كان حامل القوة <b>يوازي محور الدوران</b>.<br>في الحالتين لا يدور الجسم مهما كانت القوة كبيرة، كدفع الباب باتجاه مفصلاته.</p></details>
+<h3>الفيزياء في حياتنا</h3>
+<p>مفتاح الجنط ومفتاح الصامولة والزردية أدوات تعتمد على العزم: كلما طال ذراع المفتاح صار فك الصامولة أسهل بالقوة نفسها.</p>
+<div class="key"><b>تعلمت:</b> العزم = ذراع القوة × شدتها، ينعدم إذا مرّ حاملها بالمحور أو وازاه.</div>
+</section>
+
+<section id="s1">
+<h2>٢. عزم المزدوجة</h2>
+<div class="goal"><b>أهداف الدرس:</b><ul><li>تعريف المزدوجة وذراعها</li><li>معرفة العوامل المؤثرة في عزمها تجريبياً</li><li>استنتاج قانون عزم المزدوجة وأمثلة من حياتنا</li></ul></div>
+<h3>ما المزدوجة؟</h3>
+<p>عند تدوير مقود السيارة أو الدراجة أو فتح صنبور الماء نؤثر بقوتين معاً. تحقق هاتان القوتان الشروط الثلاثة التالية:</p>
+<div class="key"><b>المزدوجة:</b> قوتان F₁ و F₂ متوازيتا الحامل، متعاكستان جهةً، ومتساويتان شدةً (F = F₁ = F₂).</div>
+<p><b>ذراع المزدوجة (d):</b> البعد العمودي بين حاملي القوتين.</p>
+<h3>أثر المزدوجة</h3>
+<p>المزدوجة تسبب <b>دوراناً</b> فقط ولا تسبب حركة انسحابية، لأن القوتين متعاكستان ومتساويتان فمحصلتهما معدومة، لكن فعلهما التدويري يتجمع.</p>
+<div class="key"><b>عزم المزدوجة:</b> هو فعلها التدويري في الجسم.</div>
+<h3>العوامل المؤثرة في عزم المزدوجة</h3>
+<details open><summary>١) شدة القوة</summary><p>عزقتان متماثلتان وبساق واحدة: المزدوجة ذات القوة الأكبر تدير العزقة بسهولة أكبر.</p></details>
+<details open><summary>٢) طول ذراع المزدوجة</summary><p>بالقوة نفسها، كلما طال الذراع ازدادت سهولة الدوران. لذلك يسهل تدوير البراغي بمفك ذي مقبض عريض (d = 2r).</p></details>
+<h3>قانون عزم المزدوجة</h3>
+<div class="law">Γ = d · F</div>
+<p>الوحدات: Γ بالمتر نيوتن، d بالمتر، F شدة إحدى القوتين بالنيوتن.</p>
+<div class="lab"><h4>جرّب بنفسك</h4>
+<div class="row"><label>شدة القوة F</label><input type="range" id="bF" min="0" max="50" value="20" oninput="calc('b')" aria-label="شدة القوة"><span class="val" id="bFv"></span></div>
+<div class="row"><label>ذراع المزدوجة d</label><input type="range" id="bd" min="0" max="1" step="0.05" value="0.3" oninput="calc('b')" aria-label="ذراع المزدوجة"><span class="val" id="bdv"></span></div>
+<svg viewBox="0 0 300 90" aria-hidden="true"><rect x="40" y="43" width="220" height="6" rx="3" fill="var(--pri)"/><circle cx="150" cy="46" r="9" fill="var(--acc)"/><line x1="40" y1="43" x2="40" y2="8" stroke="var(--acc)" stroke-width="3"/><line x1="260" y1="49" x2="260" y2="84" stroke="var(--acc)" stroke-width="3"/><path d="M36 14l4-8 4 8zM256 78l4 8 4-8z" fill="var(--acc)"/></svg>
+<div class="bar"><i id="bB" class="p"></i></div><div class="out" id="bO"></div></div>
+<h3>الفيزياء في حياتنا</h3>
+<p>نطبق مزدوجة عند استخدام الفرجار، وفتّاحة العلب، وصنبور الماء، ومقود السيارة والدراجة.</p>
+<div class="key"><b>تعلمت:</b> المزدوجة قوتان متوازيتان متعاكستان متساويتان، وعزمها Γ = d·F ويسبب دوراناً دون انسحاب.</div>
+</section>
+
+<section id="s2">
+<h2>٣. توازن جسم صلب</h2>
+<div class="goal"><b>أهداف الدرس:</b><ul><li>تحديد مركز ثقل جسم صلب</li><li>استنتاج شرطي التوازن الانسحابي والدوراني</li><li>تمييز أنواع التوازن</li></ul></div>
+<h3>مركز ثقل الجسم الصلب</h3>
+<p>عند تعليق قطعة خشب غير منتظمة من ثقب وتعليق خيط مطمار منه، ثم رسم خط الخيط، وتكرار ذلك من ثقوب أخرى، تتلاقى الخطوط كلها في نقطة واحدة.</p>
+<div class="key"><b>مركز الثقل:</b> نقطة تلاقي هذه المستقيمات، وهو نقطة تأثير ثقل الجسم، وهو مركز توازنه.</div>
+<details open><summary>مركز ثقل الأجسام المتجانسة المتناظرة</summary><p>ينطبق مركز الثقل على مركز التناظر: منتصف السلك والمسطرة، تلاقي أقطار المستطيل والمربع، مركز الدائرة والكرة. وفي الحلقة يقع في مركزها الفارغ.</p></details>
+<h3>شرطا توازن جسم صلب</h3>
+<details open><summary>الشرط الانسحابي</summary><p>محصلة القوى الخارجية المؤثرة فيه معدومة: ΣF = 0. مثال: كتاب على طاولة، ثقله W يساوي ردّ الفعل R فيبقى ساكناً. ومثال: لعبة شد الحبل حين تتساوى قوتا الفريقين.</p></details>
+<details open><summary>الشرط الدوراني</summary><p>محصلة عزوم القوى حول محور الدوران معدومة: ΣΓ = 0، أي مجموع العزوم الموجبة يساوي مجموع العزوم السالبة، فيبقى القرص أو الساق متوازناً.</p></details>
+<h3>أنواع التوازن</h3>
+<div class="lab"><h4>اختر نوع التوازن وراقب الكرة</h4>
+<div class="opts" id="eqb"></div>
+<svg viewBox="0 0 300 130" aria-hidden="true"><path id="eqp" fill="none" stroke="var(--pri)" stroke-width="5" stroke-linecap="round"/><circle id="eqc" r="12" fill="var(--acc)"/></svg>
+<p id="eqt" style="margin:0"></p></div>
+<table><tr><th>النوع</th><th>موضع المحور</th><th>عند الإزاحة</th><th>مثال</th></tr>
+<tr><td>مستقر</td><td>فوق مركز الثقل</td><td>يعود لوضعه</td><td>ثريا معلقة</td></tr>
+<tr><td>قلق</td><td>تحت مركز الثقل</td><td>ينقلب ويبتعد</td><td>النعورة (الخذروف)</td></tr>
+<tr><td>مطلق</td><td>منطبق عليه</td><td>يبقى متوازناً</td><td>دولاب دوّار حول مركزه</td></tr></table>
+<div class="key"><b>تعلمت:</b> مركز الثقل هو مركز التوازن، والتوازن التام يتطلب شرطين: انسحابياً ودورانياً.</div>
+</section>
+
+<section id="s3">
+<h2>٤. الطاقة وتحولاتها</h2>
+<div class="goal"><b>أهداف الدرس:</b><ul><li>تعرّف الطاقة الحركية والكامنة الثقالية والمرونية</li><li>مفهوم الطاقة الميكانيكية ومصونيتها</li><li>تحولات الطاقة وكفاءتها، والطاقات المتجددة</li></ul></div>
+<h3>الطاقة</h3>
+<div class="key"><b>الطاقة:</b> قدرة الجسم على القيام بعمل، وتقاس بالجول (J). كرة البولينغ تنجز عملاً حين تُسقط الأهداف لأنها تمتلك طاقة.</div>
+<h3>الطاقة الحركية</h3>
+<p>هي الطاقة الناتجة عن حركة الجسم، وتتوقف على عاملين: <b>كتلته m</b> (kg) و<b>سرعته v</b> (m/s). الكرة الأثقل أو الأسرع تدفع الصندوق مسافة أطول فتنجز عملاً أكبر.</p>
+<div class="law">E<sub>K</sub> = ½ m v²</div>
+<p>إذا تضاعفت السرعة تصبح الطاقة الحركية أربعة أضعاف، لأنها تتناسب طرداً مع مربع السرعة.</p>
+<h3>الطاقة الكامنة الثقالية</h3>
+<p>هي الطاقة التي يختزنها جسم نتيجة العمل المبذول لرفعه إلى ارتفاع h عن سطح الأرض. تتوقف على <b>ثقل الجسم W</b> (N) و<b>ارتفاعه h</b> (m). عندما يسقط الجسم تتحول إلى طاقة حركية.</p>
+<div class="law">E<sub>P</sub> = W · h = m · g · h</div>
+<p>كرة معدنية أثقل أو تسقط من ارتفاع أكبر تخرق الحاجز الورقي بسهولة أكبر لأنها تمتلك طاقة كامنة أكبر.</p>
+<h3>الطاقة الكامنة المرونية</h3>
+<p>تمتلك بعض المواد خاصية المرونة: يتغير شكلها بقوة خارجية ثم تعود لشكلها الأصلي بزوالها (النابض، القوس والنشاب). تختزن الأجسام طاقة كامنة مرونية E<sub>P</sub> عند تغير شكلها.</p>
+<h3>الطاقة الميكانيكية ومصونيتها</h3>
+<p>الطاقة الميكانيكية E هي مجموع الطاقتين الكامنة والحركية، وتبقى ثابتة أثناء السقوط الحر (بإهمال مقاومة الهواء).</p>
+<div class="law">E = E<sub>P</sub> + E<sub>K</sub> = const</div>
+<div class="lab"><h4>كرة كتلتها 1 kg تسقط من ارتفاع 10 m</h4>
+<div class="row"><label>الارتفاع h</label><input type="range" id="eh" min="0" max="10" step="0.5" value="10" oninput="en()" aria-label="الارتفاع"><span class="val" id="ehv"></span></div>
+<div class="row"><label>طاقة كامنة</label><div class="bar" style="flex:1"><i id="ep" class="p"></i></div><span class="val" id="epv"></span></div>
+<div class="row"><label>طاقة حركية</label><div class="bar" style="flex:1"><i id="ek"></i></div><span class="val" id="ekv"></span></div>
+<div class="out" id="eO"></div><p style="text-align:center;color:var(--mut);margin:0">حرّك الشريط: الكامنة تنقص والحركية تزيد والمجموع ثابت.</p></div>
+<div class="key"><b>قانون مصونية الطاقة:</b> الطاقة لا تفنى ولا تُستحدث من العدم، بل تتحول من شكل إلى آخر دون زيادة أو نقصان.</div>
+<h3>أمثلة عن تحولات الطاقة</h3>
+<details open><summary>في حياتنا اليومية</summary><p>• أكسدة الغذاء في الجسم: كيميائية ← حركية وحرارية.<br>• المحرك الكهربائي (الغسالة): كهربائية ← حركية.<br>• المصباح: كهربائية ← ضوئية.<br>• المكواة: كهربائية ← حرارية.<br>• محرك السيارة: كيميائية (الوقود) ← حركية + حرارية.</p></details>
+<h3>كفاءة الطاقة (المردود)</h3>
+<p>يرافق تحول الطاقة انتشار جزء منها حرارة غير مفيدة. فالجهاز لا يحوّل كل الطاقة الداخلة إلى طاقة مفيدة.</p>
+<div class="law" style="font-size:20px">الكفاءة = الطاقة المفيدة ÷ الطاقة الداخلة المستهلكة</div>
+<div class="lab"><h4>قيّم الكفاءة</h4>
+<div class="row"><label>الطاقة الداخلة</label><input type="range" id="kin" min="100" max="1000" step="50" value="500" oninput="ef()" aria-label="الطاقة الداخلة"><span class="val" id="kinv"></span></div>
+<div class="row"><label>الطاقة المفيدة</label><input type="range" id="kus" min="0" max="100" value="60" oninput="ef()" aria-label="نسبة الطاقة المفيدة"><span class="val" id="kusv"></span></div>
+<div class="bar"><i id="kB"></i></div><div class="out" id="kO"></div></div>
+<h3>الطاقات المتجددة وغير المتجددة</h3>
+<table><tr><th></th><th>غير المتجددة (القابلة للنفاد)</th><th>المتجددة (غير القابلة للنفاد)</th></tr>
+<tr><td>الوصف</td><td>تحتاج ملايين السنين لتتشكل من جديد</td><td>متوفرة بشكل دائم وتُستعاد بسرعة</td></tr>
+<tr><td>المصادر</td><td>الفحم الحجري، النفط، الغاز الطبيعي، المواد المشعة</td><td>الشمس، الرياح، المياه الجارية، المد والجزر</td></tr></table>
+<div class="key"><b>ترشيد الاستهلاك:</b> خفض ضياع الطاقة بهدف ضمان مستوى من الراحة في المستقبل.</div>
+</section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const names=['عزم القوة','عزم المزدوجة','توازن جسم صلب','الطاقة وتحولاتها'];
+const tabs=$('tabs');
+names.forEach((n,i)=>{const b=document.createElement('button');b.textContent=n;b.setAttribute('role','tab');b.onclick=()=>show(i);tabs.appendChild(b)});
+function show(i){names.forEach((_,k)=>{$('s'+k).classList.toggle('on',k==i);tabs.children[k].setAttribute('aria-selected',k==i)});scrollTo(0,0);try{history.replaceState(null,'','#t'+i)}catch(e){}}
+function calc(p){const F=+$(p+'F').value,d=+$(p+'d').value,g=d*F,mx=p=='a'?100:50;
+$(p+'Fv').textContent=F+' N';$(p+'dv').textContent=d.toFixed(2)+' m';
+$(p+'B').style.width=(g/mx*100)+'%';
+$(p+'O').textContent='Γ = '+d.toFixed(2)+' × '+F+' = '+g.toFixed(1)+' m.N';
+if(p=='a')$('aN').textContent=g==0?'العزم معدوم: لن يدور الجسم':g>=40?'عزم كبير: دوران سهل':'عزم صغير: الدوران صعب'}
+const eq={s:{n:'مستقر',p:'M20 20Q150 140 280 20',c:[150,88],t:'المحور فوق مركز الثقل: إذا أُزيح الجسم قليلاً عاد إلى وضع توازنه الأصلي.'},
+q:{n:'قلق',p:'M20 115Q150 -15 280 115',c:[150,30],t:'المحور تحت مركز الثقل: إذا أُزيح قليلاً دار وابتعد ولم يعد إلى وضعه.'},
+m:{n:'مطلق',p:'M20 100H280',c:[150,88],t:'المحور منطبق على مركز الثقل: إذا أُزيح يبقى متوازناً في وضعه الجديد.'}};
+Object.keys(eq).forEach(k=>{const b=document.createElement('button');b.className='opt';b.textContent='توازن '+eq[k].n;b.dataset.k=k;b.onclick=()=>setEq(k);$('eqb').appendChild(b)});
+function setEq(k){const e=eq[k];$('eqp').setAttribute('d',e.p);$('eqc').setAttribute('cx',e.c[0]);$('eqc').setAttribute('cy',e.c[1]);$('eqt').textContent=e.t;[...$('eqb').children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.k==k))}
+function en(){const h=+$('eh').value,P=10*h,K=100-P;$('ehv').textContent=h+' m';$('ep').style.width=P+'%';$('ek').style.width=K+'%';$('epv').textContent=P+' J';$('ekv').textContent=K+' J';$('eO').textContent='E = '+P+' + '+K+' = 100 J'}
+function ef(){const i=+$('kin').value,u=+$('kus').value,w=i*u/100;$('kinv').textContent=i+' J';$('kusv').textContent=w.toFixed(0)+' J';$('kB').style.width=u+'%';$('kO').textContent='الكفاءة = '+w.toFixed(0)+' ÷ '+i+' = '+u+'%'}
+calc('a');calc('b');setEq('s');en();ef();
+show(Math.min(3,Math.max(0,parseInt((location.hash||'#t0').slice(2))||0)));
+</script>
+</body>
+</html>
